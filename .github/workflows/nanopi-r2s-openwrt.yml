@@ -142,5 +142,16 @@ jobs:
     - name: Cleanup Old Action Artifacts
       uses: kolpav/purge-artifacts-action@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        expire-in: 1d
+        token: ${{ github.token }}
+        expire-in: 7d
+  Cleanup-Workflow-Logs:
+    needs: [OpenWrt-18_06,OpenWrt-Snapshot]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cleanup Workflow Logs
+        uses: ActionsRML/delete-workflow-runs@main
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 7
+          keep_minimum_runs: 3
