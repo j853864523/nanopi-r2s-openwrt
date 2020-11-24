@@ -1,7 +1,10 @@
 name: NanoPi R2S OpenWrt
 
-on: repository_dispatch
-
+on: 
+# schedule:
+#   - cron: 5 9 * * *
+  watch:
+    types: started
 jobs:
   OpenWrt-18_06:
     runs-on: ubuntu-18.04
